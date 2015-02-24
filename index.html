@@ -19,6 +19,7 @@
   Bejeweled.canvasLoad.background();
   var game = new Bejeweled.Game();
   Bejeweled.Draw.bricks(game);
+  CanvasUtils.canvas.addEventListener("mousedown", CanvasUtils.getPosition.bind(CanvasUtils), false);
 </script>
 </body>
 </html>
