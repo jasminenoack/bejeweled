@@ -23,4 +23,16 @@ block.prototype.id = function (){
   return (" " + this.pos[0] + this.pos[1]).substring(1)
 }
 
+block.prototype.switch = function (otherBlock) {
+  start = this.pos;
+  end = otherBlock.pos;
+
+  var temp = this;
+  this.game.blocks[start[0]][start[1]] = otherBlock;
+  otherBlock.pos = start
+
+  this.game.blocks[end[0]][end[1]] = temp;
+  this.pos = end
+}
+
 })();

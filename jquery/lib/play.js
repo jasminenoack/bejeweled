@@ -44,8 +44,12 @@ setup.handleClick = function (event) {
   ) {
     this.unselect($block, block);
   } else {
+    block.switch(this.selected[1])
     this.unselect.apply(this, this.selected)
-    this.select($block, block);
+
+    var board = $(".bejeweled")
+    board.empty()
+    this.draw()
   }
 
   // console.log(this.selected)
@@ -60,9 +64,6 @@ setup.prototype.unselect = function ($block, block) {
   $block.removeClass("selected")
   this.selected = undefined;
 }
-
-
-
 
 var play = new setup()
 // console.log (play.game)
