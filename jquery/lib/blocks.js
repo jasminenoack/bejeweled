@@ -18,4 +18,9 @@ block.create = function (pos, game) {
   return new block(color, pos, game)
 }
 
+block.prototype.id = function (){
+  // console.log(this)
+  return (" " + this.pos[0] + this.pos[1]).substring(1)
+}
+
 })();

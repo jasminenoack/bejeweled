@@ -12,23 +12,17 @@ var setup = Bejeweled.setup = function () {
 var draw = setup.prototype.draw = function () {
   var blocks = this.game.blocks
   var board = $(".bejeweled")
-  console.log(board)
 
   for (var i = 0; i < 8; i++) {
     for (var j = 0; j < 8; j++) {
       var block = blocks[i][j]
+      var id = block.id()
+      var color = block.color
       var $block = $("<block></block>");
-      var pos = (" " + block.pos[0] + block.pos[1]).substring(1)
 
       $block.css("background", block.color);
-      $block.css("display", "block");
-      $block.css("float", "left");
-      $block.css("height", "60px");
-      $block.css("width", "60px");
-      $block.css("border-radius", "5px");
-      $block.css("border", "1px solid black");
-      $block.attr("id", pos);
-      $block.css("margin", "1px");
+      $block.attr("id", id);
+
       $block.click(setup.handleClick.bind(this));
 
       board.append($block);
@@ -43,24 +37,27 @@ setup.handleClick = function (event) {
   var block = game.blocks[id[0]][id[1]]
 
   if (this.selected === undefined) {
-    this.select(block);
+    this.select($block, block);
   } else if (
-    this.selected.pos[0] === block.pos[0] &&
-    this.selected.pos[1] === block.pos[1]
+    this.selected[1].pos[0] === block.pos[0] &&
+    this.selected[1].pos[1] === block.pos[1]
   ) {
-    this.unselect(block);
+    this.unselect($block, block);
   } else {
-    this.select(block);
+    this.unselect.apply(this, this.selected)
+    this.select($block, block);
   }
 
-  console.log(this.selected)
+  // console.log(this.selected)
 }
 
-setup.prototype.select = function (block) {
-  this.selected = block;
+setup.prototype.select = function ($block, block) {
+  this.selected = [$block, block];
+  $block.addClass("selected")
 }
 
-setup.prototype.unselect = function (block) {
+setup.prototype.unselect = function ($block, block) {
+  $block.removeClass("selected")
   this.selected = undefined;
 }
 
@@ -68,7 +65,7 @@ setup.prototype.unselect = function (block) {
 
 
 var play = new setup()
-console.log (play.game)
+// console.log (play.game)
 play.draw()
 
 })();
