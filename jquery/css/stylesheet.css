@@ -1,0 +1,27 @@
+body, section, article, p, h1, ul, li {
+  display: block;
+  font: inherit;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+  text-decoration: inherit;
+  box-sizing: content-box;
+}
+
+body {
+  padding: 10px;
+}
+
+
+section {
+  width: 512px;
+  height: 512px;
+  background: transparent;
+  margin: auto;
+  border: 5px solid black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+section.bejeweled {}
