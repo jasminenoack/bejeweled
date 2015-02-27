@@ -6,31 +6,29 @@ body, section, article, p, h1, ul, li {
   padding: 0;
   text-align: inherit;
   text-decoration: inherit;
-  box-sizing: content-box;
+  box-sizing: inherit;
+}
+
+.board {
+  list-style: none;
 }
 
 body {
-  padding: 10px;
+  padding: 20px;
 }
 
 
 section {
-  width: 512px;
+  /*width: 512px;
   height: 512px;
   background: transparent;
   margin: auto;
   border: 5px solid black;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 5px;*/
 }
 
-.selected{
-  border: 6px solid black;
-  margin: -4px;
-  position: relative;
-}
-
-block {
+.board li {
   display: block;
   float: left;
   height: 60px;
@@ -38,6 +36,44 @@ block {
   border-radius: 5px;
   border: 1px solid black;
   margin: 1px;
+}
+
+.board .yellow {
+  background: yellow;
+}
+
+.board .green {
+  background: green;
+}
+
+.board .orange {
+  background: orange;
+}
+
+.board .purple {
+  background: purple;
+}
+
+.board .blue {
+  background: blue;
+}
+
+.board .white {
+  background: white;
+}
+
+.board .red {
+  background: red;
+}
+
+.board .black {
+  background: black; 
+}
+
+.board .selected{
+  border: 6px solid black;
+  margin: -4px;
+  position: relative;
 }
 
 section.bejeweled {}
