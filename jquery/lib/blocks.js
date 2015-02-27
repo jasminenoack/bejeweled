@@ -1,18 +1,21 @@
-// ;(function () {
-//
-// if (window.Bejeweled === undefined) {
-//   window.Bejeweled = {}
-// };
-//
-//
-// var block = Bejeweled.Block = function (color, pos, game) {
-//   this.pos = pos;
-//   this.color = color;
-//   this.game = game;
-// }
-//
-// block.COLORS = ["red", "green", "blue", "yellow", "orange", "purple"]
-//
+;(function () {
+
+if (window.Bejeweled === undefined) {
+  window.Bejeweled = {}
+};
+
+var block = Bejeweled.Block = function (color, pos, game) {
+  this.pos = pos;
+  this.color = color;
+  this.game = game;
+}
+
+block.COLORS = ["red", "green", "blue", "yellow", "orange", "purple", "white", "black"]
+
+block.RandomColor = function () {
+  return block.COLORS[Math.floor(Math.random() * 8)]
+}
+
 // block.create = function (pos, game) {
 //   var color = block.COLORS[Math.floor(Math.random() * block.COLORS.length)]
 //   return new block(color, pos, game)
@@ -35,4 +38,4 @@
 //   this.pos = end
 // }
 //
-// })();
+})();
