@@ -9,6 +9,14 @@ var view = Bejeweled.View = function (rows, columns, $el) {
   this.rows = rows;
   this.columns = columns;
   this.drawBlocks();
+  this.bindClick();
+}
+
+view.prototype.bindClick = function () {
+  console.log(this.$el)
+  this.$el.click("li", function () {
+    console.log(this);
+  });
 }
 
 view.prototype.drawBlocks = function () {
@@ -20,6 +28,5 @@ view.prototype.drawBlocks = function () {
     this.$el.append($li)
   };
 };
-
 
 })();
