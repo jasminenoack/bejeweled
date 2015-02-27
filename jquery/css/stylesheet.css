@@ -11,6 +11,7 @@ body, section, article, p, h1, ul, li {
 
 .board {
   list-style: none;
+  width: 512px;
 }
 
 body {
@@ -67,7 +68,7 @@ section {
 }
 
 .board .black {
-  background: black; 
+  background: black;
 }
 
 .board .selected{

@@ -13,8 +13,9 @@ var view = Bejeweled.View = function (rows, columns, $el) {
 
 view.prototype.drawBlocks = function () {
   var $li
+  console.log(this.rows * this.columns)
   for (var i = 0; i < this.rows * this.columns; i++ ) {
-    $li = $("<li><li>")
+    $li = $("<li></li>")
     $li.addClass(Bejeweled.Block.RandomColor());
     this.$el.append($li)
   };
