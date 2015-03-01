@@ -10,35 +10,41 @@ var view = Bejeweled.View = function (rows, columns, el) {
   this.rows = rows;
   this.columns = columns;
   this.drawBlocks();
-  this.selected = null
+  this.selected = null;
+  this.game = new Bejeweled.Game(this.rows, this.columns)
 
-  console.log(this.$ul instanceof jQuery)
   this.$ul.on("click", "li", this.handleClick.bind(this));
 }
 
 view.prototype.handleClick = function (event) {
   var $li = $(event.currentTarget)
+  var pos = $li.index()
+  var target = this.selected ? this.selected.index() : null
 
-  if (!this.selected) {
+  if (!target) {
     $li.addClass("selected");
     this.selected = $li;
 
-  } else if (this.selected.index() === $li.index()) {
+  } else if (target === pos) {
     this.selected.removeClass("selected");
     this.selected = null
 
   } else if (this.selected) {
-    Bejeweled.Block.switchColors($li, this.selected)
 
-    console.log(this.selected)
-    this.selected.removeClass("selected");
-    this.selected = null
+    if (this.game.validSwitch(target, pos)) {
+      Bejeweled.Block.switchColors($li, this.selected)
+
+      this.selected.removeClass("selected");
+      this.selected = null
+    } else {
+      console.log ("can't move there")
+    }
+
   }
 }
 
 view.prototype.drawBlocks = function () {
   var $li
-  console.log(this.rows * this.columns)
   for (var i = 0; i < this.rows * this.columns; i++ ) {
     $li = $("<li></li>")
     var color = Bejeweled.Block.RandomColor();

@@ -4,11 +4,7 @@ if (window.Bejeweled === undefined) {
   window.Bejeweled = {}
 };
 
-var block = Bejeweled.Block = function (color, pos, game) {
-  this.pos = pos;
-  this.color = color;
-  this.game = game;
-}
+var block = Bejeweled.Block = {}
 
 block.COLORS = ["red", "green", "blue", "yellow", "orange", "purple", "white", "black"]
 
