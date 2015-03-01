@@ -16,26 +16,14 @@ block.RandomColor = function () {
   return block.COLORS[Math.floor(Math.random() * 8)]
 }
 
-// block.create = function (pos, game) {
-//   var color = block.COLORS[Math.floor(Math.random() * block.COLORS.length)]
-//   return new block(color, pos, game)
-// }
-//
-// block.prototype.id = function (){
-//   // console.log(this)
-//   return (" " + this.pos[0] + this.pos[1]).substring(1)
-// }
-//
-// block.prototype.switch = function (otherBlock) {
-//   start = this.pos;
-//   end = otherBlock.pos;
-//
-//   var temp = this;
-//   this.game.blocks[start[0]][start[1]] = otherBlock;
-//   otherBlock.pos = start
-//
-//   this.game.blocks[end[0]][end[1]] = temp;
-//   this.pos = end
-// }
-//
+block.switchColors = function ($li1, $li2) {
+  var color1 = $li1.data("color")
+  var color2 = $li2.data("color")
+
+  $li1.removeClass(color1).addClass(color2);
+  $li1.data("color", color2);
+  $li2.removeClass(color2).addClass(color1);
+  $li2.data("color", color1);
+}
+
 })();

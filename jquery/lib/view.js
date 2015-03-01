@@ -28,22 +28,12 @@ view.prototype.handleClick = function (event) {
     this.selected = null
 
   } else if (this.selected) {
-    this.switchColors($li, this.selected)
+    Bejeweled.Block.switchColors($li, this.selected)
 
     console.log(this.selected)
     this.selected.removeClass("selected");
     this.selected = null
   }
-}
-
-view.prototype.switchColors = function ($li1, $li2) {
-  var color1 = $li1.data("color")
-  var color2 = $li2.data("color")
-
-  $li1.removeClass(color1).addClass(color2);
-  $li1.data("color", color2);
-  $li2.removeClass(color2).addClass(color1);
-  $li2.data("color", color1);
 }
 
 view.prototype.drawBlocks = function () {
