@@ -37,6 +37,7 @@ section {
   border-radius: 5px;
   border: 1px solid black;
   margin: 1px;
+  transition: opacity 1s;
 }
 
 .board .yellow {
@@ -75,6 +76,10 @@ section {
   border: 6px solid black;
   margin: -4px;
   position: relative;
+}
+
+.board .match {
+  opacity: 0;
 }
 
 section.bejeweled {}

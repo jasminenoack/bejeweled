@@ -11,7 +11,7 @@ var view = Bejeweled.View = function (rows, columns, el) {
   this.columns = columns;
   this.drawBlocks();
   this.selected = null;
-  this.game = new Bejeweled.Game(this.rows, this.columns)
+  this.game = new Bejeweled.Game(this.rows, this.columns, this.$ul.find("li"))
 
   this.$ul.on("click", "li", this.handleClick.bind(this));
 }
@@ -37,7 +37,10 @@ view.prototype.handleClick = function (event) {
       this.selected.removeClass("selected");
       this.selected = null
 
-      console.log (this.game.findMatches(this.$ul))
+      inMatch = this.game.findMatches(this.$ul)
+      this.game.handleMatches(inMatch)
+
+      console.log (inMatch)
     } else {
       console.log ("can't move there")
     }
