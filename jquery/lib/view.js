@@ -32,14 +32,16 @@ view.prototype.handleClick = function (event) {
   } else if (this.selected) {
 
     if (this.game.validSwitch(target, pos)) {
-      Bejeweled.Block.switchColors($li, this.selected)
-
       this.selected.removeClass("selected");
-      this.selected = null
+
+
+      Bejeweled.Block.switchColors($li, this.selected)
 
       inMatch = this.game.findMatches(this.$ul)
       this.game.handleMatches(inMatch)
 
+      this.selected = null
+      
       console.log (inMatch)
     } else {
       console.log ("can't move there")

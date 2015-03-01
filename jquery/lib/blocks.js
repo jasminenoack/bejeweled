@@ -13,13 +13,13 @@ block.RandomColor = function () {
 }
 
 block.switchColors = function ($li1, $li2) {
-  var color1 = $li1.data("color")
-  var color2 = $li2.data("color")
+  var class1 = $li1.attr("class")
+  var class2 = $li2.attr("class")
 
-  $li1.removeClass(color1).addClass(color2);
-  $li1.data("color", color2);
-  $li2.removeClass(color2).addClass(color1);
-  $li2.data("color", color1);
+  $li1.removeClass(class1).addClass(class2);
+  $li1.data("color", class2);
+  $li2.removeClass(class2).addClass(class1);
+  $li2.data("color", class1);
 }
 
 block.findColors = function ($ul) {
@@ -32,5 +32,7 @@ block.findColors = function ($ul) {
 
   return (colors)
 };
+
+
 
 })();

@@ -55,10 +55,7 @@ game.prototype.handleMatches = function (indexs) {
     var $block = $(this.$blocks[indexs[i]])
     console.log($block)
     $block.addClass("match")
-
   }
-
-
 }
 
 
