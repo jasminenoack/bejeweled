@@ -30,14 +30,20 @@ view.prototype.handleClick = function (event) {
   } else if (this.selected) {
     this.switchColors($li, this.selected)
 
+    console.log(this.selected)
     this.selected.removeClass("selected");
     this.selected = null
   }
 }
 
 view.prototype.switchColors = function ($li1, $li2) {
-  var tempColor = $li1.color
-  console.log(tempColor)
+  var color1 = $li1.data("color")
+  var color2 = $li2.data("color")
+
+  $li1.removeClass(color1).addClass(color2);
+  $li1.data("color", color2);
+  $li2.removeClass(color2).addClass(color1);
+  $li2.data("color", color1);
 }
 
 view.prototype.drawBlocks = function () {
@@ -49,7 +55,7 @@ view.prototype.drawBlocks = function () {
 
     $li.addClass(color);
     $li.data("color", color);
-    
+
     this.$ul.append($li);
   };
 };
