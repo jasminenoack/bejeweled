@@ -61,11 +61,46 @@ game.prototype.handleMatches = function (indexs, callback) {
   if (!$block) {
     callback()
   } else {
-    $block.on("transitionend", callback)
+    $block.on("transitionend", function () {
+      callback()
+    })
   }
 }
 
-game.prototype.cascade = function() {
+game.prototype.cascade = function(callback) {
+  var $blocks = this.$ul.find(".match")
+  var matchIndexs = $blocks.map(function(index, block) {
+    return $(block).index()
+  })
+  if ($blocks.length === 0) {
+    return callback()
+  }
+
+  var bringDownTo = []
+  var add = []
+
+  // find change set
+  // check from bottom up
+  for (var i = 0; i < matchIndexs.length; i++) {
+    if (matchIndexs[i] < this.columns ) {
+      add.push($blocks.eq(matchIndexs[i]))
+    } else if (!_.contains(matchIndexs, matchIndexs[i] - this.columns)) {
+      bringDownTo.push($blocks.eq(matchIndexs[i]))
+    }
+  }
+
+  for (var i = 0; i < add.length; i++) {
+    console.log($blocks.eq(i))
+    var $block = $blocks.eq(i)
+    Bejeweled.Block.colorBlock($blocks.eq(i).removeAttr("class"))
+  }
+
+
+
+
+  console.log(add, bringDownTo)
+  // recall cascade
+  return callback()
 
 }
 

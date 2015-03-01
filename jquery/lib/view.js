@@ -47,8 +47,10 @@ view.prototype.handleClick = function (event) {
         inMatch = this.game.findMatches(this.$ul)
         this.selected = null
         this.game.handleMatches(inMatch, function () {
-          this.disabled = false;
-          console.log ("disabled", this.disabled)
+          this.game.cascade( function () {
+            this.disabled = false;
+            console.log ("disabled", this.disabled)
+          }.bind(this))
         }.bind(this))
 
       }.bind(this))
@@ -66,11 +68,7 @@ view.prototype.handleClick = function (event) {
 view.prototype.drawBlocks = function () {
   var $li
   for (var i = 0; i < this.rows * this.columns; i++ ) {
-    $li = $("<li></li>")
-    var color = Bejeweled.Block.RandomColor();
-
-    $li.addClass(color);
-    $li.data("color", color);
+    $li = Bejeweled.Block.colorBlock($("<li></li>"))
 
     this.$ul.append($li);
   };

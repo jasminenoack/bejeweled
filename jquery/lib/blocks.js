@@ -60,6 +60,15 @@ block.findColors = function ($ul) {
   return (colors)
 };
 
+block.colorBlock = function ($li) {
+  var color = Bejeweled.Block.RandomColor();
+
+
+  $li.addClass(color);
+  $li.data("color", color);
+  return $li
+}
+
 
 
 })();
