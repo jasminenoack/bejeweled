@@ -11,12 +11,18 @@ var view = Bejeweled.View = function (rows, columns, el) {
   this.columns = columns;
   this.drawBlocks();
   this.selected = null;
-  this.game = new Bejeweled.Game(this.rows, this.columns, this.$ul.find("li"))
+  this.game = new Bejeweled.Game(this.rows, this.columns, this.$ul)
 
   this.$ul.on("click", "li", this.handleClick.bind(this));
+  this.disabled = false;
 }
 
 view.prototype.handleClick = function (event) {
+  if (this.disabled) {
+    return;
+  };
+  this.disabled = true;
+
   var $li = $(event.currentTarget)
   var pos = $li.index()
   var target = this.selected ? this.selected.index() : null
@@ -24,10 +30,12 @@ view.prototype.handleClick = function (event) {
   if (!this.selected) {
     $li.addClass("selected");
     this.selected = $li;
+    this.disabled = false;
 
   } else if (target === pos) {
     this.selected.removeClass("selected");
     this.selected = null
+    this.disabled = false;
 
   } else if (this.selected) {
 
@@ -37,17 +45,19 @@ view.prototype.handleClick = function (event) {
 
       Bejeweled.Block.switchColors($li, this.selected, function () {
         inMatch = this.game.findMatches(this.$ul)
-        this.game.handleMatches(inMatch)
-
         this.selected = null
+        this.game.handleMatches(inMatch, function () {
+          this.disabled = false;
+          console.log ("disabled", this.disabled)
+        }.bind(this))
 
-        console.log (inMatch)
       }.bind(this))
 
 
 
     } else {
       console.log ("can't move there")
+      this.disabled = false;
     }
 
   }

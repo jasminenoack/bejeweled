@@ -30,7 +30,6 @@ block.switchColors = function ($li1, $li2, callback) {
     }
 
   } else {
-    console.log (pos1-pos2)
     if (pos1 - pos2 === 8) {
       $li2.addClass("to-bottom");
       $li1.addClass("to-top");
@@ -41,7 +40,6 @@ block.switchColors = function ($li1, $li2, callback) {
   }
 
   $li1.on("transitionend", function () {
-    console.log($li1, $li2)
     $li1.removeClass().addClass(class2);
     $li1.data("color", color2)
     $li2.removeClass().addClass(class1);

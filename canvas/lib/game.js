@@ -21,7 +21,6 @@
   }
 
   Bejeweled.Game.clickEvent = function (x, y) {
-    console.log("click")
     Bejeweled.Brick.find(x, y)
   }
 

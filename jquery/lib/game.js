@@ -4,11 +4,11 @@ if (window.Bejeweled === undefined) {
   window.Bejeweled = {}
 }
 
-var game = Bejeweled.Game = function (rows, columns, $lis) {
+var game = Bejeweled.Game = function (rows, columns, $ul) {
   this.rows = rows;
   this.columns = columns;
   this.neighbors = [1, -1, columns, -columns];
-  this.$blocks = $lis
+  this.$ul = $ul
 }
 
 game.prototype.validSwitch = function (pos, target) {
@@ -49,13 +49,24 @@ game.prototype.findMatches = function ($ul) {
   return sets
 }
 
-game.prototype.handleMatches = function (indexs) {
+game.prototype.handleMatches = function (indexs, callback) {
+  var $block = null;
+  var $blocks = this.$ul.find("li")
   // remove matches
   for(var i = 0; i < indexs.length; i++) {
-    var $block = $(this.$blocks[indexs[i]])
-    console.log($block)
+    $block = $($blocks[indexs[i]])
     $block.addClass("match")
   }
+
+  if (!$block) {
+    callback()
+  } else {
+    $block.on("transitionend", callback)
+  }
+}
+
+game.prototype.cascade = function() {
+
 }
 
 
