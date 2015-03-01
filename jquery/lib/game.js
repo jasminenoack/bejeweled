@@ -70,35 +70,42 @@ game.prototype.handleMatches = function (indexs, callback) {
 game.prototype.cascade = function(callback) {
   var $blocks = this.$ul.find(".match")
   var matchIndexs = $blocks.map(function(index, block) {
+    console.log($(block).index())
     return $(block).index()
   })
   if ($blocks.length === 0) {
     return callback()
   }
 
-  var bringDownTo = []
-  var add = []
+  var $bringDownTo = []
+  var $add = []
 
-  // find change set
-  // check from bottom up
   for (var i = 0; i < matchIndexs.length; i++) {
+    console.log(matchIndexs[i])
     if (matchIndexs[i] < this.columns ) {
-      add.push($blocks.eq(matchIndexs[i]))
+      console.log("add")
+      // console.log(matchIndexs[i])
+      $add.push($blocks[i])
     } else if (!_.contains(matchIndexs, matchIndexs[i] - this.columns)) {
-      bringDownTo.push($blocks.eq(matchIndexs[i]))
+      $bringDownTo.push($blocks[i])
     }
   }
 
-  for (var i = 0; i < add.length; i++) {
-    console.log($blocks.eq(i))
-    var $block = $blocks.eq(i)
-    Bejeweled.Block.colorBlock($blocks.eq(i).removeAttr("class"))
+  for (var i = 0; i < $add.length; i++) {
+    var $block = $($add[i])
+    Bejeweled.Block.colorBlock($block.removeAttr("class"))
+  }
+
+  for (var i = 0; i < $bringDownTo.length; i++) {
+    // var $block = $($bringDownTo[i]);
+    // var $upperBlock = $blocks.eq(i-this.columns)
+    // Bejeweled.Block.switchColors($block, $upperBlock)
   }
 
 
 
 
-  console.log(add, bringDownTo)
+  console.log($add, $bringDownTo)
   // recall cascade
   return callback()
 
