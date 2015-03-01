@@ -12,6 +12,7 @@ body, section, article, p, h1, ul, li {
 .board {
   list-style: none;
   width: 512px;
+  position: relative;
 }
 
 body {
@@ -38,7 +39,31 @@ section {
   border: 1px solid black;
   margin: 1px;
   transition: opacity 1s;
+  left: 0;
+  top: 0;
+  position: relative;
 }
+
+.board .to-left {
+  left: -64px;
+  transition: left 1s;
+}
+
+.board .to-top {
+  top: -64px;
+  transition: top 1s;
+}
+
+.board .to-right {
+  left: 64px;
+  transition: left 1s;
+}
+
+.board .to-bottom {
+  top: 64px;
+  transition: top 1s;
+}
+
 
 .board .yellow {
   background: yellow;
@@ -80,6 +105,12 @@ section {
 
 .board .match {
   opacity: 0;
+}
+
+.board .remove {
+  background: transparent;
+  border: 0;
+  margin: 2px;
 }
 
 section.bejeweled {}

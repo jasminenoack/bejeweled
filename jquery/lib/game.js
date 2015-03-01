@@ -33,7 +33,7 @@ game.prototype.findMatches = function ($ul) {
       nextIndex = set[set.length-1] + matchDirs[mIndex]
 
       while(color === colors[nextIndex]) {
-        if (nextIndex % this.columns === 0) {
+        if (matchDirs[mIndex] === 1 && nextIndex % this.columns === 0) {
           break
         }
         set.push(nextIndex)

@@ -21,7 +21,7 @@ view.prototype.handleClick = function (event) {
   var pos = $li.index()
   var target = this.selected ? this.selected.index() : null
 
-  if (!target) {
+  if (!this.selected) {
     $li.addClass("selected");
     this.selected = $li;
 
@@ -35,14 +35,17 @@ view.prototype.handleClick = function (event) {
       this.selected.removeClass("selected");
 
 
-      Bejeweled.Block.switchColors($li, this.selected)
+      Bejeweled.Block.switchColors($li, this.selected, function () {
+        inMatch = this.game.findMatches(this.$ul)
+        this.game.handleMatches(inMatch)
 
-      inMatch = this.game.findMatches(this.$ul)
-      this.game.handleMatches(inMatch)
+        this.selected = null
 
-      this.selected = null
-      
-      console.log (inMatch)
+        console.log (inMatch)
+      }.bind(this))
+
+
+
     } else {
       console.log ("can't move there")
     }
