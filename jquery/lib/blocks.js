@@ -22,4 +22,15 @@ block.switchColors = function ($li1, $li2) {
   $li2.data("color", color1);
 }
 
+block.findColors = function ($ul) {
+  var $lis = $ul.find("li");
+
+  var colors = $lis.map(function (index, block) {
+    return $(block).data("color")
+    // block.data("color")
+  });
+
+  return (colors)
+};
+
 })();

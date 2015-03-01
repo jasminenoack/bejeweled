@@ -36,6 +36,8 @@ view.prototype.handleClick = function (event) {
 
       this.selected.removeClass("selected");
       this.selected = null
+
+      console.log (this.game.findMatches(this.$ul))
     } else {
       console.log ("can't move there")
     }
