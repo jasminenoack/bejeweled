@@ -6,7 +6,7 @@ if (window.Bejeweled === undefined) {
 
 var block = Bejeweled.Block = {}
 
-block.COLORS = ["red", "green", "blue"] //, "yellow", "orange", "purple", "white", "black" ]
+block.COLORS = ["red", "green", "blue", "yellow", "orange", "purple", "white", "black" ]
 
 block.RandomColor = function () {
   return block.COLORS[Math.floor(Math.random() * block.COLORS.length)]
@@ -51,8 +51,7 @@ block.switchColors = function ($li1, $li2, callback) {
     if (callback) {
       callback()
     }
-  })
-
+  });
 }
 
 block.findColors = function ($ul) {

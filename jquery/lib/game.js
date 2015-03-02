@@ -76,7 +76,6 @@ var cascade = game.prototype.cascade = function(callback) {
       return $(block).index()
     })
     if ($matchBlocks.length === 0) {
-      console.log("end end")
       return callback()
     }
 

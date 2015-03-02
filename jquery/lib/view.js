@@ -14,13 +14,13 @@ var view = Bejeweled.View = function (rows, columns, el) {
   this.game = new Bejeweled.Game(this.rows, this.columns, this.$ul)
 
   this.$ul.on("click", "li", this.handleClick.bind(this));
-  this.disabled = false;
+  this.disabled = true;
   setTimeout(this.checkBoard.bind(this), 0)
   window.view = this
 }
 
 view.prototype.checkBoard = function () {
-  console.log("blocks", this.$ul.find("li").length)
+  console.log("check")
   this.game.isTransitionsEnd($(".board li"), function () {
 
     var matches = this.game.findMatches();
@@ -29,6 +29,8 @@ view.prototype.checkBoard = function () {
       this.game.handleMatches(matches, function() {
       this.game.cascade(this.checkBoard.bind(this))
       }.bind(this));
+    } else {
+      this.disabled = false;
     }
   }.bind(this))
 
@@ -56,25 +58,14 @@ view.prototype.handleClick = function (event) {
 
   } else if (this.selected) {
 
-  //   if (this.game.validSwitch(target, pos)) {
-  //     this.selected.removeClass("selected");
-  //
-  //
-  //     Bejeweled.Block.switchColors($li, this.selected, function () {
-  //       inMatch = this.game.findMatches(this.$ul)
-  //       this.selected = null
-  //       this.game.handleMatches(inMatch, function () {
-  //         this.game.cascade( function () {
-  //           this.disabled = false;
-  //         }.bind(this))
-  //       }.bind(this))
-  //
-  //     }.bind(this))
-  //
-  //   } else {
+    if (this.game.validSwitch(target, pos)) {
+      this.selected.removeClass("selected")
+      Bejeweled.Block.switchColors($li, this.selected, this.checkBoard.bind(this))
+      this.selected = null
+
+    } else {
       this.disabled = false;
-  //   }
-  //
+    }
   }
 
 }
