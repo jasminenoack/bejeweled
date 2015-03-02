@@ -20,10 +20,17 @@ var view = Bejeweled.View = function (rows, columns, el) {
 }
 
 view.prototype.checkBoard = function () {
-  var matches = this.game.findMatches();
-  this.game.handleMatches(matches, function() {
-    this.game.cascade()
-  }.bind(this));
+  console.log("blocks", this.$ul.find("li").length)
+  this.game.isTransitionsEnd($(".board li"), function () {
+
+    var matches = this.game.findMatches();
+
+    if (matches.length > 0) {
+      this.game.handleMatches(matches, function() {
+      this.game.cascade(this.checkBoard.bind(this))
+      }.bind(this));
+    }
+  }.bind(this))
 }
 
 view.prototype.handleClick = function (event) {

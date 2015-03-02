@@ -69,15 +69,14 @@ game.prototype.handleMatches = function (indexs, callback) {
 }
 
 var cascade = game.prototype.cascade = function(callback) {
-  console.log("cascade")
   var $blocks = this.$ul.find("li")
   var $matchBlocks = this.$ul.find(".match")
   var matchIndexs = $matchBlocks.map(function(index, block) {
     return $(block).index()
   })
   if ($matchBlocks.length === 0) {
-    // return callback()
-    return
+    console.log("end end")
+    return callback()
   }
 
   var $fullAbove = []
@@ -96,10 +95,6 @@ var cascade = game.prototype.cascade = function(callback) {
     Bejeweled.Block.colorBlock($block.removeAttr("class"))
   }
 
-  if ($fullAbove.length === 0) {
-    this.cascade()
-  }
-
   for (var i = 0; i < $fullAbove.length; i++) {
     var $block = $($fullAbove[i])
     var $upperBlock = $($blocks[$block.index() - 8])
@@ -109,19 +104,36 @@ var cascade = game.prototype.cascade = function(callback) {
       Bejeweled.Block.switchColors($block, $upperBlock)
     }
   }
+  this.isTransitionsEnd($fullAbove, this.cascade.bind(this, callback))
 
-  $($fullAbove).one("transitionend", function () {
-    var transitions = $fullAbove.map(function (index, block) {
-      return ($(index)).data("transitioning")
-    })
+}
 
-    if (!(_.contains(transitions, true))) {
-      setTimeout(this.cascade.bind(this), 0)
+game.prototype.isTransitionsEnd = function (blocks, callback) {
+  var transitioning = false
+  for (var i = 0; i < blocks.length; i ++) {
+    if ($(blocks[i]).data("transitioning")) {
+      transitioning = true
     }
-  }.bind(this))
+  }
 
-  window.game = this
+  if (transitioning) {
+    $(blocks).one("transitionend", function () {
+      transitions = []
 
+      transitioning = false
+      for (var i = 0; i < blocks.length; i ++) {
+        if ($(blocks[i]).data("transitioning")) {
+          transitioning = true
+        }
+      }
+
+      if (!transitioning) {
+        return (setTimeout(callback, 5))
+      }
+    }.bind(this))
+  } else {
+    return (setTimeout(callback, 5))
+  }
 }
 
 })();
