@@ -103,8 +103,8 @@ section {
 }
 
 .board .match {
-  /*opacity: 0;*/
-  background: #FF00FF
+  opacity: 0;
+  /*background: #FF00FF*/
   /*transition: opacity 1s;*/
 }
 

@@ -31,6 +31,7 @@ view.prototype.checkBoard = function () {
       }.bind(this));
     }
   }.bind(this))
+
 }
 
 view.prototype.handleClick = function (event) {

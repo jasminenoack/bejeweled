@@ -69,43 +69,44 @@ game.prototype.handleMatches = function (indexs, callback) {
 }
 
 var cascade = game.prototype.cascade = function(callback) {
-  var $blocks = this.$ul.find("li")
-  var $matchBlocks = this.$ul.find(".match")
-  var matchIndexs = $matchBlocks.map(function(index, block) {
-    return $(block).index()
-  })
-  if ($matchBlocks.length === 0) {
-    console.log("end end")
-    return callback()
-  }
-
-  var $fullAbove = []
-  var $add = []
-
-  for (var i = 0; i < matchIndexs.length; i++) {
-    if (matchIndexs[i] < this.columns ) {
-      $add.push($matchBlocks[i])
-    } else if (!(_.contains(matchIndexs, matchIndexs[i] - this.columns))) {
-      $fullAbove.push($matchBlocks[i])
+  setTimeout(function () {
+    var $blocks = this.$ul.find("li")
+    var $matchBlocks = this.$ul.find(".match")
+    var matchIndexs = $matchBlocks.map(function(index, block) {
+      return $(block).index()
+    })
+    if ($matchBlocks.length === 0) {
+      console.log("end end")
+      return callback()
     }
-  }
 
-  for (var i = 0; i < $add.length; i++) {
-    var $block = $($add[i])
-    Bejeweled.Block.colorBlock($block.removeAttr("class"))
-  }
+    var $fullAbove = []
+    var $add = []
 
-  for (var i = 0; i < $fullAbove.length; i++) {
-    var $block = $($fullAbove[i])
-    var $upperBlock = $($blocks[$block.index() - 8])
-    if (i === $fullAbove.length - 1) {
-      Bejeweled.Block.switchColors($block, $upperBlock)
-    } else {
-      Bejeweled.Block.switchColors($block, $upperBlock)
+    for (var i = 0; i < matchIndexs.length; i++) {
+      if (matchIndexs[i] < this.columns ) {
+        $add.push($matchBlocks[i])
+      } else if (!(_.contains(matchIndexs, matchIndexs[i] - this.columns))) {
+        $fullAbove.push($matchBlocks[i])
+      }
     }
-  }
-  this.isTransitionsEnd($fullAbove, this.cascade.bind(this, callback))
 
+    for (var i = 0; i < $add.length; i++) {
+      var $block = $($add[i])
+      Bejeweled.Block.colorBlock($block.removeAttr("class"))
+    }
+
+    for (var i = 0; i < $fullAbove.length; i++) {
+      var $block = $($fullAbove[i])
+      var $upperBlock = $($blocks[$block.index() - 8])
+      if (i === $fullAbove.length - 1) {
+        Bejeweled.Block.switchColors($block, $upperBlock)
+      } else {
+        Bejeweled.Block.switchColors($block, $upperBlock)
+      }
+    }
+    this.isTransitionsEnd($fullAbove, this.cascade.bind(this, callback))
+  }.bind(this), 200)
 }
 
 game.prototype.isTransitionsEnd = function (blocks, callback) {
