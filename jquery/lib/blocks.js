@@ -6,7 +6,7 @@ if (window.Bejeweled === undefined) {
 
 var block = Bejeweled.Block = {}
 
-block.COLORS = ["red", "green", "blue" /*, "yellow", "orange", "purple", "white", "black" */]
+block.COLORS = ["red", "green", "blue", "yellow", "orange", "purple", "white", "black" ]
 
 block.RandomColor = function () {
   return block.COLORS[Math.floor(Math.random() * block.COLORS.length)]
@@ -17,6 +17,8 @@ block.switchColors = function ($li1, $li2, callback) {
   var color1 = $li1.data("color")
   var class2 = $li2.attr("class")
   var color2 = $li2.data("color")
+  $li1.data("transitioning", true)
+  $li2.data("transitioning", true)
   var pos1 = $li1.index()
   var pos2 = $li2.index()
 
@@ -39,11 +41,14 @@ block.switchColors = function ($li1, $li2, callback) {
     }
   }
 
-  $li1.on("transitionend", function () {
+  $li1.one("transitionend", function (event) {
     $li1.removeClass().addClass(class2);
     $li1.data("color", color2)
     $li2.removeClass().addClass(class1);
     $li2.data("color", color1)
+    $li1.data("transitioning", false)
+    $li2.data("transitioning", false)
+    // console.log($li1.index(), $li2.index())
     if (callback) {
       callback()
     }
@@ -63,6 +68,7 @@ block.findColors = function ($ul) {
 };
 
 block.colorBlock = function ($li) {
+
   var color = Bejeweled.Block.RandomColor();
 
 

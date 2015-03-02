@@ -20,7 +20,8 @@ game.prototype.validSwitch = function (pos, target) {
   return false
 }
 
-game.prototype.findMatches = function ($ul) {
+game.prototype.findMatches = function () {
+  var $ul = this.$ul
   var set, cIndex, nIndex, color, next
   var colors = Bejeweled.Block.findColors($ul)
   var sets = []
@@ -61,33 +62,32 @@ game.prototype.handleMatches = function (indexs, callback) {
   if (!$block) {
     callback()
   } else {
-    $block.on("transitionend", function () {
+    // $block.one("transitionend", function () {
       callback()
-    })
+    // })
   }
 }
 
-game.prototype.cascade = function(callback) {
-  var $blocks = this.$ul.find(".match")
-  var matchIndexs = $blocks.map(function(index, block) {
-    console.log($(block).index())
+var cascade = game.prototype.cascade = function(callback) {
+  console.log("cascade")
+  var $blocks = this.$ul.find("li")
+  var $matchBlocks = this.$ul.find(".match")
+  var matchIndexs = $matchBlocks.map(function(index, block) {
     return $(block).index()
   })
-  if ($blocks.length === 0) {
-    return callback()
+  if ($matchBlocks.length === 0) {
+    // return callback()
+    return
   }
 
-  var $bringDownTo = []
+  var $fullAbove = []
   var $add = []
 
   for (var i = 0; i < matchIndexs.length; i++) {
-    console.log(matchIndexs[i])
     if (matchIndexs[i] < this.columns ) {
-      console.log("add")
-      // console.log(matchIndexs[i])
-      $add.push($blocks[i])
-    } else if (!_.contains(matchIndexs, matchIndexs[i] - this.columns)) {
-      $bringDownTo.push($blocks[i])
+      $add.push($matchBlocks[i])
+    } else if (!(_.contains(matchIndexs, matchIndexs[i] - this.columns))) {
+      $fullAbove.push($matchBlocks[i])
     }
   }
 
@@ -96,20 +96,32 @@ game.prototype.cascade = function(callback) {
     Bejeweled.Block.colorBlock($block.removeAttr("class"))
   }
 
-  for (var i = 0; i < $bringDownTo.length; i++) {
-    // var $block = $($bringDownTo[i]);
-    // var $upperBlock = $blocks.eq(i-this.columns)
-    // Bejeweled.Block.switchColors($block, $upperBlock)
+  if ($fullAbove.length === 0) {
+    this.cascade()
   }
 
+  for (var i = 0; i < $fullAbove.length; i++) {
+    var $block = $($fullAbove[i])
+    var $upperBlock = $($blocks[$block.index() - 8])
+    if (i === $fullAbove.length - 1) {
+      Bejeweled.Block.switchColors($block, $upperBlock)
+    } else {
+      Bejeweled.Block.switchColors($block, $upperBlock)
+    }
+  }
 
+  $($fullAbove).one("transitionend", function () {
+    var transitions = $fullAbove.map(function (index, block) {
+      return ($(index)).data("transitioning")
+    })
 
+    if (!(_.contains(transitions, true))) {
+      setTimeout(this.cascade.bind(this), 0)
+    }
+  }.bind(this))
 
-  console.log($add, $bringDownTo)
-  // recall cascade
-  return callback()
+  window.game = this
 
 }
-
 
 })();

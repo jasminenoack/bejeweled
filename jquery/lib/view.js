@@ -15,6 +15,15 @@ var view = Bejeweled.View = function (rows, columns, el) {
 
   this.$ul.on("click", "li", this.handleClick.bind(this));
   this.disabled = false;
+  setTimeout(this.checkBoard.bind(this), 0)
+  window.view = this
+}
+
+view.prototype.checkBoard = function () {
+  var matches = this.game.findMatches();
+  this.game.handleMatches(matches, function() {
+    this.game.cascade()
+  }.bind(this));
 }
 
 view.prototype.handleClick = function (event) {
@@ -39,30 +48,27 @@ view.prototype.handleClick = function (event) {
 
   } else if (this.selected) {
 
-    if (this.game.validSwitch(target, pos)) {
-      this.selected.removeClass("selected");
-
-
-      Bejeweled.Block.switchColors($li, this.selected, function () {
-        inMatch = this.game.findMatches(this.$ul)
-        this.selected = null
-        this.game.handleMatches(inMatch, function () {
-          this.game.cascade( function () {
-            this.disabled = false;
-            console.log ("disabled", this.disabled)
-          }.bind(this))
-        }.bind(this))
-
-      }.bind(this))
-
-
-
-    } else {
-      console.log ("can't move there")
+  //   if (this.game.validSwitch(target, pos)) {
+  //     this.selected.removeClass("selected");
+  //
+  //
+  //     Bejeweled.Block.switchColors($li, this.selected, function () {
+  //       inMatch = this.game.findMatches(this.$ul)
+  //       this.selected = null
+  //       this.game.handleMatches(inMatch, function () {
+  //         this.game.cascade( function () {
+  //           this.disabled = false;
+  //         }.bind(this))
+  //       }.bind(this))
+  //
+  //     }.bind(this))
+  //
+  //   } else {
       this.disabled = false;
-    }
-
+  //   }
+  //
   }
+
 }
 
 view.prototype.drawBlocks = function () {
@@ -73,5 +79,6 @@ view.prototype.drawBlocks = function () {
     this.$ul.append($li);
   };
 };
+
 
 })();
