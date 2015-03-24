@@ -11,30 +11,49 @@ body, section, article, p, h1, ul, li {
 
 .board {
   list-style: none;
-  width: 512px;
+  width: 432px;
   position: relative;
+  background: #D3D3D3;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 body {
   padding: 20px;
 }
 
-
 section {
-  /*width: 512px;
-  height: 512px;
-  background: transparent;
+  text-align: center;
+  width: 700px;
+  background: #FADADD;
   margin: auto;
   border: 5px solid black;
   padding: 5px;
-  border-radius: 5px;*/
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+
+.score {
+  width: 200px;
+  float: right;
+}
+
+h1 {
+  font-size: 26px;
+  padding: 10px;
 }
 
 .board li {
   display: block;
   float: left;
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   border-radius: 5px;
   border: 1px solid black;
   margin: 1px;
@@ -44,22 +63,22 @@ section {
 }
 
 .board .to-left {
-  left: -64px;
+  left: -54px;
   transition: left 0.2s;
 }
 
 .board .to-top {
-  top: -64px;
+  top: -54px;
   transition: top 0.2s;
 }
 
 .board .to-right {
-  left: 64px;
+  left: 54px;
   transition: left 0.2s;
 }
 
 .board .to-bottom {
-  top: 64px;
+  top: 54px;
   transition: top 0.2s;
 }
 
