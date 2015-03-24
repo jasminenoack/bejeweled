@@ -45,22 +45,22 @@ section {
 
 .board .to-left {
   left: -64px;
-  transition: left 1s;
+  transition: left 0.2s;
 }
 
 .board .to-top {
   top: -64px;
-  transition: top 1s;
+  transition: top 0.2s;
 }
 
 .board .to-right {
   left: 64px;
-  transition: left 1s;
+  transition: left 0.2s;
 }
 
 .board .to-bottom {
   top: 64px;
-  transition: top 1s;
+  transition: top 0.2s;
 }
 
 
