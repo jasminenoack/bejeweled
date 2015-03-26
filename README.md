@@ -1,6 +1,7 @@
 # Bejeweled
 
 This repository contains a Bejeweled leverages CSS transitions to allow blocks to move simultaneously.
+
 [Live](http://jasminenoack.github.io/bejeweled/)
 
 # TODO:
