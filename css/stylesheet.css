@@ -16,12 +16,18 @@ body, section, article, p, h1, ul, li {
   background: #D3D3D3;
   padding: 20px;
   border-radius: 20px;
+  float: left;
 }
 
 .group:after {
   content: "";
   display: block;
   clear: both;
+}
+
+.start {
+  float: right;
+  clear: right;
 }
 
 body {
