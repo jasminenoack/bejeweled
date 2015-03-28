@@ -139,4 +139,13 @@ h1 {
   margin: 2px;
 }
 
+.timer {
+  clear: both;
+  width: 650px;
+  height: 50px;
+  background: red;
+  margin: 10px auto;
+  border-radius: 20px;
+}
+
 section.bejeweled {}
