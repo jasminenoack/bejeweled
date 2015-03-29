@@ -1,4 +1,4 @@
-body, section, article, p, h1, ul, li {
+body, section, article, p, h1, ul, li, ol {
   display: block;
   font: inherit;
   background: transparent;
@@ -13,7 +13,7 @@ body, section, article, p, h1, ul, li {
   list-style: none;
   width: 432px;
   position: relative;
-  background: #D3D3D3;
+  background: darkgray;
   padding: 20px;
   border-radius: 20px;
   float: left;
@@ -25,9 +25,13 @@ body, section, article, p, h1, ul, li {
   clear: both;
 }
 
-.start {
-  float: right;
-  clear: right;
+button {
+  margin: auto;
+  background: #FADADD;
+  border: 2px solid darkred;
+  outline: 0;
+  padding: 10px;
+  border-radius: 20px;
 }
 
 body {
@@ -48,6 +52,7 @@ section {
 .score {
   width: 200px;
   float: right;
+  border: 0;
 }
 
 h1 {
@@ -69,22 +74,22 @@ h1 {
 
 .board .to-left {
   left: -54px;
-  transition: left 0.3s;
+  transition: left 0.1s;
 }
 
 .board .to-top {
   top: -54px;
-  transition: top 0.3s;
+  transition: top 0.1s;
 }
 
 .board .to-right {
   left: 54px;
-  transition: left 0.3s;
+  transition: left 0.1s;
 }
 
 .board .to-bottom {
   top: 54px;
-  transition: top 0.2s;
+  transition: top 0.1s;
 }
 
 
@@ -160,8 +165,8 @@ h1 {
   top: 0;
   left: 0;
   border-bottom: 15px solid white;
-  border-left: 15px solid #D3D3D3;
-  border-right: 15px solid #D3D3D3;
+  border-left: 15px solid darkgray;
+  border-right: 15px solid darkgray;
   width: 22px;
   height: 0;
 }
@@ -172,8 +177,8 @@ h1 {
   bottom: 0;
   left: 0;
   border-top: 15px solid white;
-  border-left: 15px solid #D3D3D3;
-  border-right: 15px solid #D3D3D3;
+  border-left: 15px solid darkgray;
+  border-right: 15px solid darkgray;
   width: 22px;
   height: 0;
 }
