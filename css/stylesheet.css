@@ -70,17 +70,17 @@ h1 {
 
 .board .to-left {
   left: -54px;
-  transition: left 0.2s;
+  transition: left 0.3s;
 }
 
 .board .to-top {
   top: -54px;
-  transition: top 0.2s;
+  transition: top 0.3s;
 }
 
 .board .to-right {
   left: 54px;
-  transition: left 0.2s;
+  transition: left 0.3s;
 }
 
 .board .to-bottom {
