@@ -94,33 +94,8 @@ h1 {
 
 
 .board .yellow {
-  border: 0;
-}
-
-.board .yellow:after {
-  border-top: 0;
-  width: 0;
-  height: 0;
-  border-left: 26px solid transparent;
-  border-right: 26px solid transparent;
-  border-top: 40px solid yellow;
-  position: absolute;
-  content: "";
-  top: 12px;
-  left: 0px;
-}
-
-.board .yellow:before {
-  content: "";
-  border-radius: 0;
-  border-top: 0;
-  width: 0;
-  height: 0;
-  border-left: 26px solid transparent;
-  border-right: 26px solid transparent;
-  border-bottom: 40px solid yellow;
-  left: 0;
-  position: absolute;
+  border: 15px solid yellow;
+  border-radius: 50%;
 }
 
 .board .green {
@@ -184,26 +159,14 @@ h1 {
 }
 
 .board .red {
-}
-
-
-.board .red:before {
-  content: "";
-  height: 52px;
-  position: absolute;
-  width: 12px;
-  background: red;
-  left: 20px;
-}
-
-.board .red:after {
-  background: red;
-  content: "";
-  height: 12px;
-  left: 0px;
-  position: absolute;
-  top: 20px;
   width: 52px;
+  height: 52px;
+  border-left: 26px solid transparent;
+  border-right: 26px solid transparent;
+  border-top: 52px solid red;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 
 .board .black {
